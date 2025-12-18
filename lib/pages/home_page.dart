@@ -9,6 +9,8 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: NotesPage(),
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.grey[600],
         iconSize: 35,
         unselectedFontSize: 0,
         selectedFontSize: 0,

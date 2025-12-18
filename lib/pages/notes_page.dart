@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_masonry_view/flutter_masonry_view.dart';
 import 'package:notes_app/global_variables.dart';
+import 'package:notes_app/pages/add_note_page.dart';
 
 class NotesPage extends StatefulWidget {
   const NotesPage({super.key});
@@ -12,6 +13,7 @@ class NotesPage extends StatefulWidget {
 class _NotesPageState extends State<NotesPage> {
   final List<String> filters = const [
     "All notes",
+    "Default notes",
     "Quick notes",
     "Call summaries",
     "Handwritten notes",
@@ -101,38 +103,53 @@ class _NotesPageState extends State<NotesPage> {
                     listOfItem: sampleNotes,
                     numberOfColumn: 2,
                     itemBuilder: (item) {
-                      return Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '${item['header']}',
-                                style: TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return AddNotePage(
+                                  title: item['header'],
+                                  content: item['content'],
+                                );
+                              },
+                            ),
+                          );
+                        },
+                        child: Card(
+                          color: Colors.grey[900],
+                          child: Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  '${item['header']}',
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: 4),
-                              Text(
-                                '${item['content']}',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.grey,
+                                SizedBox(height: 4),
+                                Text(
+                                  '${item['content']}',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.grey,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
                                 ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              SizedBox(height: 6),
-                              Text(
-                                '${item['date']}',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.grey,
+                                SizedBox(height: 6),
+                                Text(
+                                  '${item['date']}',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.grey,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       );
@@ -147,15 +164,22 @@ class _NotesPageState extends State<NotesPage> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(16.0),
         child: FloatingActionButton(
-          onPressed: () {},
-          backgroundColor: const Color.fromARGB(255, 196, 151, 17),
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  return AddNotePage(title: '', content: '');
+                },
+              ),
+            );
+          },
+          backgroundColor: const Color.fromARGB(255, 245, 176, 17),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadiusGeometry.circular(50),
           ),
-          child: Icon(Icons.add, size: 40),
+          child: Icon(Icons.add, size: 50, color: Colors.white),
         ),
       ),
-      
     );
   }
 }

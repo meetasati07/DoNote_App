@@ -1,5 +1,5 @@
 List<Map<String, dynamic>> sampleNotes = [
-  {"header": "Expense", "content": "Parth - 400", "date": "12/12/25"},
+  {"header": "Expense", "content": "Parth - 4560", "date": "12/12/25"},
   {
     "header": "To Watchfsefsefsefsef",
     "content":
